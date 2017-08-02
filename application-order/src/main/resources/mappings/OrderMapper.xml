@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huang.dao.OrderMapper" >
+
+  <resultMap id="orderResultMap" type="com.huang.entry.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <id column="age" property="age" jdbcType="INTEGER" />
+    <id column="sex" property="sex" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="order_column_list" >
+     id, order_no, `name`, age, sex
+  </sql>
+
+  <select id="queryByOrderNo" resultMap="orderResultMap" parameterType="java.lang.String">
+      select
+      <include refid="order_column_list"/>
+      from tb_order
+      where order_no = #{orderNo, jdbcType=VARCHAR} limit 1
+  </select>
+
+  <insert id="insert" parameterType="com.huang.entry.Order">
+      <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+          select LAST_INSERT_ID()
+      </selectKey>
+      insert into tb_order(<include refid="order_column_list"/>)
+      values(#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR})
+  </insert>
+    
+  <update id="updateByPrimaryKey" parameterType="com.huang.entry.Order">
+      update tb_order
+      <set>
+          <if test="orderNo != null">
+            order_no = #{orderNo, jdbcType=VARCHAR},
+          </if>
+          <if test="name != null">
+              name = #{name, jdbcType=VARCHAR},
+          </if>
+          <if test="age != null">
+            age = #{age, jdbcType=INTEGER},
+          </if>
+          <if test="sex != null">
+              sex = #{sex, jdbcType=VARCHAR},
+          </if>
+      </set>
+      WHERE id = #{id, jdbcType=BIGINT}
+  </update>
+  
+  <delete id="delete" parameterType="com.huang.entry.Order">
+      delete from tb_order
+      <where>
+          <if test="orderNo != null">
+              order_no = #{orderNo, jdbcType=VARCHAR}
+          </if>
+          <if test="name != null">
+             and name = #{name, jdbcType=VARCHAR}
+          </if>
+          <if test="age != null">
+              and age = #{age, jdbcType=INTEGER}
+          </if>
+          <if test="sex != null">
+              and sex = #{sex, jdbcType=VARCHAR}
+          </if>
+      </where>
+  </delete>
+
+
+</mapper>
