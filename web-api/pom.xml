@@ -29,15 +29,20 @@
             </exclusions>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>io.dubbo.springboot</groupId>-->
-            <!--<artifactId>spring-boot-starter-dubbo</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>io.dubbo.springboot</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.gomefinance</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
         <dependency>
@@ -65,9 +70,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-amqp</artifactId>
-        </dependency>
+
     </dependencies>
 </project>

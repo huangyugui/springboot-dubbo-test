@@ -1,5 +1,7 @@
 package com.huang.config;
 
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -43,5 +45,9 @@ public class RabbitConfig {
     public Binding bindingExchangePushMessage(DirectExchange exceptionExchange, Queue exceptionQueue){
         return BindingBuilder.bind(exceptionQueue).to(exceptionExchange).with(exceptionPushKey);
     }
+
+//    public Channel getChannel(){
+//
+//    }
 
 }
