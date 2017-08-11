@@ -9,6 +9,7 @@
         <module>web-api</module>
         <module>application-order-api</module>
         <module>application-order</module>
+        <module>application-rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
 

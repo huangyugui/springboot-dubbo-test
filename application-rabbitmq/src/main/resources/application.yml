@@ -20,14 +20,39 @@ spring:
       testOnReturn: false
   dubbo:
     application:
-      name: application-order
+      name: application-rabbitmq
     protocol:
       name: dubbo
-      port: 20881
+      port: 20882
     registry:
       address: zookeeper://localhost:2291
     scan: com.huang
+  rabbitmq:
+    addresses: localhost:5672
+    virtual-host: sit
+    publisher-confirms: true
+    password: admin
+    username: admin
+    listener:
+      acknowledge-mode: auto
 
 mybatis:
   mapperLocations: classpath:/mappings/**/*.xml
   typeAliasesPackage: com.huang.entry
+
+
+rabbitmq.exchange.exception: exception_exchange
+rabbitmq.queue.exception: exception_queue
+rabbitmq.pushkey.exception: exception_pushkey
+
+#启用shutdown节点
+endpoints.shutdown.enabled: true
+#指定shutdown endpoint的路径
+endpoints.shutdown.path: /close
+#指定管理IP
+management.address: 127.0.0.1
+#禁用安全验证
+endpoints.shutdown.sensitive: false
+
+server:
+  port: 8080

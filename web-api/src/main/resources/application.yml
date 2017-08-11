@@ -11,3 +11,22 @@ spring:
     registry:
       address: zookeeper://localhost:2291
     scan: com.huang
+  rabbitmq:
+    addresses: localhost:5672
+    virtual-host: sit
+    publisher-confirms: true
+    password: admin
+    username: admin
+    listener:
+      acknowledge-mode: auto
+
+
+spring.dubbo.application.owner: meijie-thirdparty-consumer
+spring.dubbo.application.name: meijie-thirdparty-consumer
+spring.dubbo.application.organization: gomefinance-meijie
+spring.dubbo.registries[0].id: myfRegistry
+spring.dubbo.registries[0].address: zookeeper://localhost:2291
+
+rabbitmq.exchange.exception: exception_exchange
+rabbitmq.queue.exception: exception_queue
+rabbitmq.pushkey.exception: exception_pushkey
