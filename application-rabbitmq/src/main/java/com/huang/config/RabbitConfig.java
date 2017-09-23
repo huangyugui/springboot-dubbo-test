@@ -46,8 +46,4 @@ public class RabbitConfig {
         return BindingBuilder.bind(exceptionQueue).to(exceptionExchange).with(exceptionPushKey);
     }
 
-//    public Channel getChannel(){
-//
-//    }
-
 }
