@@ -33,7 +33,7 @@ public class OrderController {
 
     @GetMapping("/query/{orderNo}")
     public OrderDto queryByOrderNo1(@PathVariable("orderNo") String orderNo){
-        OrderDto orderDto = orderManager.queryByOrderNo(orderNo);
+        OrderDto orderDto = orderManager.query(orderNo);
         return orderDto;
     }
 
