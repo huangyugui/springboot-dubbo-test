@@ -25,9 +25,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ThreadPoolTaskExecutor mvcTaskExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(30);
-        executor.setQueueCapacity(20);
-        executor.setMaxPoolSize(100);
+        executor.setCorePoolSize(60);
+        executor.setQueueCapacity(100);
+        executor.setMaxPoolSize(1000);
         executor.initialize();
         return executor;
 

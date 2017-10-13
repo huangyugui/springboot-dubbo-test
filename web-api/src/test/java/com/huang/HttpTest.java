@@ -22,10 +22,10 @@ public class HttpTest {
 
     public static void main(String[] args){
         log.info("开始了");
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 1000; i++){
             new Thread(() -> {
                 try {
-                    int radom = new Random().nextInt(1000);
+                    int radom = new Random().nextInt(10000);
                     log.info("" + radom);
                     TimeUnit.MILLISECONDS.sleep(radom);
                 } catch (InterruptedException e) {

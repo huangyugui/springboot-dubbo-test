@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +45,9 @@ public class OrderController {
     public Callable<GlobalResult> testThread() {
         return () -> {
             log.info(Thread.currentThread().getName() + " come in....");
-            TimeUnit.SECONDS.sleep(6l);
+            int radom = new Random().nextInt(3000);
+            log.info("" + radom);
+            TimeUnit.SECONDS.sleep(10l);
             GlobalResult result = new GlobalResult("001", "111111");
             log.info(Thread.currentThread().getName() + " come out....");
             return result;

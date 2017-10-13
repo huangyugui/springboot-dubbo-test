@@ -51,7 +51,7 @@ public class HttpClientUtil {
                 .setConnectionRequestTimeout(30000)
                 .build();
         return HttpClients.custom().setDefaultRequestConfig(config)
-                .setMaxConnTotal(200)
+                .setMaxConnTotal(1000)
                 .setMaxConnPerRoute(20)
                 .build();
     }
