@@ -49,4 +49,17 @@ public class WebTest {
         log.info("status: {}, body: {}", code, body);
     }
 
+    @Test
+    public void testThread() throws Exception {
+        for(int i = 0; i < 100; i++){
+            log.info("第 " + i + " 次请求!!!");
+            MvcResult result = mvc.perform(
+                    MockMvcRequestBuilders.get("/order/test")
+                            .accept(MediaType.APPLICATION_JSON)).andReturn();
+            int code = result.getResponse().getStatus();
+            String body = result.getResponse().getContentAsString();
+            log.info("status: {}, body: {}", code, body);
+        }
+    }
+
 }

@@ -51,7 +51,10 @@ import java.util.concurrent.TimeUnit;
 public class StringRedisTest {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource(name="redisTemplate")
     private ListOperations<String, Person> listOperations;
@@ -104,9 +107,10 @@ public class StringRedisTest {
         log.info("increment + 1.1 = {}", valueOperations.increment("key7", 1.1d));
         log.info("increment + 1.1 = {}", valueOperations.increment("key7", 1.1d));
         BoundValueOperations bvo = redisTemplate.boundValueOps("key8");
-        bvo.set("7");
         log.info("increment 7 + 2 = {}", bvo.increment(2));
-
+        stringRedisTemplate.opsForValue().increment("key9", 1);
+        stringRedisTemplate.opsForValue().increment("key9", 5);
+        log.info("key9 = {}", stringRedisTemplate.opsForValue().get("key9"));
     }
 
     @Test
@@ -141,7 +145,8 @@ public class StringRedisTest {
         //BLPOP
         log.info("blpop: {}", listOperations.leftPop("lk1", 10, TimeUnit.SECONDS));
         //如果所有给定 key 都不存在或包含空列表，那么 BLPOP 命令将阻塞连接，直到等待超时，或有另一个客户端对给定 key 的任意一个执行 LPUSH 或 RPUSH 命令为止。
-        log.info("blpop: {}", listOperations.leftPop("lk2", 20, TimeUnit.SECONDS));
+//        log.info("blpop: {}", listOperations.leftPop("lk2", 20, TimeUnit.SECONDS));
+        log.info("list: {}", listOperations.range("lk1", 0, -1));
     }
 
     @Test

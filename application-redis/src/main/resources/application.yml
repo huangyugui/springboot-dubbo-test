@@ -1,6 +1,6 @@
 # REDIS (RedisProperties)
 # Redis数据库索引（默认为0）
-spring.redis.database: 5
+spring.redis.database: 6
 # Redis服务器地址
 spring.redis.host: 10.143.117.25
 #spring.redis.sentinel.nodes: 10.143.117.25:26379,10.143.117.25:26380,10.143.117.25:26381
@@ -19,3 +19,6 @@ spring.redis.pool.max-idle: 8
 spring.redis.pool.min-idle: 0
 # 连接超时时间（毫秒）
 spring.redis.timeout: 0
+
+# 如果有多个包名前缀，用逗号隔开
+#fastjson.parser.autoTypeAccept: com.huang.
