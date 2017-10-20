@@ -19,16 +19,16 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0
  *          Copyright (c) 2017 国美金控-美借
  */
-@Configurable
+//@Configurable
 public class RabbitConfig {
 
-    @Value("rabbitmq.exchange.exception")
+    @Value("${rabbitmq.exchange.exception}")
     private String exceptionExchange;
 
-    @Value("rabbitmq.queue.exception")
+    @Value("${rabbitmq.queue.exception}")
     private String exceptionQuque;
 
-    @Value("rabbitmq.queue.exception")
+    @Value("${rabbitmq.queue.exception}")
     private String exceptionPushKey;
 
     @Bean

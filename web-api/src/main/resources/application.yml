@@ -3,22 +3,22 @@ server:
 
 server.context-path: /mj
 
-## Dubbo 服务消费者配置
-#spring:
-#  dubbo:
-#    application:
-#      name: web-api
-#    registry:
-#      address: zookeeper://localhost:2291
-#    scan: com.huang
-#  rabbitmq:
-#    addresses: localhost:5672
-#    virtual-host: sit
-#    publisher-confirms: true
-#    password: admin
-#    username: admin
-#    listener:
-#      acknowledge-mode: manual
+# Dubbo 服务消费者配置
+spring:
+  dubbo:
+    application:
+      name: web-api
+    registry:
+      address: zookeeper://localhost:2291
+    scan: com.huang
+  rabbitmq:
+    addresses: localhost:5672
+    virtual-host: sit
+    publisher-confirms: true
+    password: admin
+    username: admin
+    listener:
+      acknowledge-mode: manual
 
 
 spring.dubbo.application.owner: meijie-thirdparty-consumer

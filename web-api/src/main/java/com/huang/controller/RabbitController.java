@@ -2,6 +2,7 @@ package com.huang.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huang.config.RabbitMqProducer;
 import com.huang.dto.OrderDto;
 import com.huang.manager.OrderManager;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +29,14 @@ public class RabbitController {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-//    @Value("rabbitmq.exchange.exception")
-//    private String exceptionExchange;
-//
-//    @Value("rabbitmq.pushkey.exception")
-//    private String exceptionPushKey;
+    @Autowired
+    private RabbitMqProducer rabbitMqProducer;
+
+    @Value("${rabbitmq.exchange.exception}")
+    private String exceptionExchange;
+
+    @Value("${rabbitmq.pushkey.exception}")
+    private String exceptionPushKey;
 
     @GetMapping("/exception")
     public String exception(){
@@ -40,8 +44,20 @@ public class RabbitController {
             Map<String, String> map = new HashMap();
             map.put("key", "key" + i);
             map.put("name", "lisi" + i);
+            log.info("msg: {}", JSON.toJSONString(map));
+            rabbitMqProducer.messageProducer(JSON.toJSONString(map));
+        }
+        return "success";
+    }
+
+    @GetMapping("/exception1")
+    public String exception1(){
+        for(int i = 0; i < 10; i++){
+            Map<String, String> map = new HashMap();
+            map.put("key", "key" + i);
+            map.put("name", "lisi" + i);
             log.info("msg: {}" + JSON.toJSONString(map));
-            rabbitTemplate.convertAndSend("exception_exchange", "exception_pushkey", map);
+            rabbitTemplate.convertAndSend(exceptionExchange, exceptionPushKey, map);
         }
         return "success";
     }

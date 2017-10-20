@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
  * @version 1.0
  *          Copyright (c) 2017 国美金控-美借
  */
-@Component
+//@Component
 @Slf4j
 public class ConsumerService {
 
