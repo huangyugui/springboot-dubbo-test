@@ -11,6 +11,7 @@
         <module>application-order</module>
         <module>application-rabbitmq</module>
         <module>application-redis</module>
+        <module>application-common</module>
     </modules>
     <packaging>pom</packaging>
 

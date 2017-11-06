@@ -98,8 +98,8 @@ public class SerializerFeatureTest {
 //        prettyFormat();
 //        writeDateUseDateFormat();
 //        beanToArray();
-//        showJsonBySelf();
-        parse();
+        showJsonBySelf();
+//        parse();
     }
 
 
