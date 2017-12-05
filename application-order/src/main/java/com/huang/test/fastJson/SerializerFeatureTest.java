@@ -93,12 +93,12 @@ public class SerializerFeatureTest {
 //        writeMapNullValue();
 //        useISO8601DateFormat();
 //        writeNullListAsEmpty();
-//        writeNullStringAsEmpty();
+        writeNullStringAsEmpty();
 //        sortField();
 //        prettyFormat();
 //        writeDateUseDateFormat();
 //        beanToArray();
-        showJsonBySelf();
+//        showJsonBySelf();
 //        parse();
     }
 

@@ -40,9 +40,9 @@ import java.util.concurrent.TimeUnit;
  * Description:
  * Created on 2017/9/26 14:01
  *
- * @author <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
+ * @author <a href="mailto: yugui_huang0305@163.com">黄渝贵</a>
  * @version 1.0
- *          Copyright (c) 2017 国美金控-美借
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)// SpringJUnit支持，由此引入Spring-Test框架支持！
 @SpringBootTest(classes = RedisApplication.class)// 指定我们SpringBoot工程的Application启动类

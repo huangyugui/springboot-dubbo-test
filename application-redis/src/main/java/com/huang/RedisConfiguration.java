@@ -13,9 +13,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * Description:
  * Created on 2017/9/28 11:56
  *
- * @author <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
+ * @author <a href="mailto: yugui_huang0305@163.com">黄渝贵</a>
  * @version 1.0
- *          Copyright (c) 2017 国美金控-美借
+ *
  */
 @Configuration
 public class RedisConfiguration {
