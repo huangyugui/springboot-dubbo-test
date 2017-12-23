@@ -31,8 +31,14 @@ public class RabbitMqProducer {
     @Value("${rabbitmq.queue.exception}")
     private String exceptionQuque;
 
-    @Value("${rabbitmq.queue.exception}")
+    @Value("${rabbitmq.pushkey.exception}")
     private String exceptionPushKey;
+
+    @Value("${rabbitmq.queue.exception1}")
+    private String exceptionQuque1;
+
+    @Value("${rabbitmq.pushkey.exception1}")
+    private String exceptionPushKey1;
 
     @Resource
     private AmqpTemplate amqpTemplate;
@@ -50,6 +56,14 @@ public class RabbitMqProducer {
         amqpAdmin.declareQueue(queue);
 
         amqpAdmin.declareBinding(BindingBuilder.bind(queue).to(directEx).with(exceptionPushKey));
+
+
+        Queue queue1 = new Queue(exceptionQuque1);
+
+        amqpAdmin.declareExchange(directEx);
+        amqpAdmin.declareQueue(queue1);
+
+        amqpAdmin.declareBinding(BindingBuilder.bind(queue1).to(directEx).with(exceptionPushKey1));
         log.info("rabbitmq配置完成......");
     }
 

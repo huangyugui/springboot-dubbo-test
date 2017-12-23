@@ -30,3 +30,7 @@ spring.dubbo.registries[0].address: zookeeper://localhost:2291
 rabbitmq.exchange.exception: exception_exchange
 rabbitmq.queue.exception: exception_queue
 rabbitmq.pushkey.exception: exception_pushkey
+
+
+rabbitmq.queue.exception1: exception_queue1
+rabbitmq.pushkey.exception1: exception_pushkey1

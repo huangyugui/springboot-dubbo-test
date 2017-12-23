@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
  * @version 1.0
  *
  */
-@Component
+//@Component
 @Slf4j
 public class ConsumerService1 {
 

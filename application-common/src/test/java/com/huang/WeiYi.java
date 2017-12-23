@@ -24,9 +24,19 @@ public class WeiYi {
     private static final int TERMINATED =  3 << COUNT_BITS;
 
     public static void main(String[] args){
+        test3();
 
+    }
 
+    private static void test3(){
+        System.out.println(Integer.toBinaryString(16));
+        print(16 >>> 3);
 
+        int SHARED_SHIFT   = 16;
+        print((1 << SHARED_SHIFT));
+        print((1 << SHARED_SHIFT) - 1);
+        print(200 >>> SHARED_SHIFT);
+        print(2 & (1 << SHARED_SHIFT) - 1);
     }
 
     private static void test2(){
@@ -35,6 +45,7 @@ public class WeiYi {
         print(RUNNING & ~CAPACITY);
         print(RUNNING & CAPACITY);
         print(RUNNING | CAPACITY);
+
         final Unsafe unsafe = Unsafe.getUnsafe();
         try {
             long valueOffset = unsafe.objectFieldOffset
