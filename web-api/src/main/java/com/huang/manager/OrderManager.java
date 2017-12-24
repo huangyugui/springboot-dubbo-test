@@ -21,9 +21,10 @@ public class OrderManager {
 
     public OrderDto query(String orderNo){
         OrderDto orderDto = new OrderDto();
-        orderDto.setAge(11);
-        orderDto.setId(16l);
-        orderDto.setName("账单");
+
+//        orderDto.setAge(11);
+//        orderDto.setId(16l);
+//        orderDto.setName("账单");
         return orderDto;
     }
 

@@ -34,11 +34,13 @@
             <artifactId>spring-boot-starter-dubbo</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>com.gomefinance</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>1.0.1</version>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

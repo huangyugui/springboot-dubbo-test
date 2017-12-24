@@ -18,6 +18,6 @@ public class RabbitProducer implements RabbitTemplate.ConfirmCallback {
 
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        log.info("confirm, id={}, ack={}, cause={}", correlationData.getId(), ack, cause);
+        log.info("confirm, id={}, ack={}, cause={}", correlationData == null ? "null": correlationData.getId(), ack, cause);
     }
 }
