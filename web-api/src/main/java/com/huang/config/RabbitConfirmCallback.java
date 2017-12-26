@@ -1,4 +1,4 @@
-package com.huang.manager;
+package com.huang.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class RabbitProducer implements RabbitTemplate.ConfirmCallback {
+public class RabbitConfirmCallback implements RabbitTemplate.ConfirmCallback {
 
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        log.info("confirm, id={}, ack={}, cause={}", correlationData == null ? "null": correlationData.getId(), ack, cause);
+        log.info("\nid={}\nack={}\ncause={}\n", correlationData == null ? "null": correlationData.getId(), ack, cause);
     }
 }

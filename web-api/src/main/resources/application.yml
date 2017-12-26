@@ -21,6 +21,7 @@ spring:
       acknowledge-mode: manual
 
 
+
 spring.dubbo.application.owner: meijie-thirdparty-consumer
 spring.dubbo.application.name: meijie-thirdparty-consumer
 spring.dubbo.application.organization: gomefinance-meijie
@@ -31,6 +32,7 @@ rabbitmq.exchange.exception: exception_exchange
 rabbitmq.queue.exception: exception_queue
 rabbitmq.pushkey.exception: exception_pushkey
 
-
 rabbitmq.queue.exception1: exception_queue1
 rabbitmq.pushkey.exception1: exception_pushkey1
+
+rabbitmq.queue.deadLetter: dealLetter_queue

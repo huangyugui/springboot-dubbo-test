@@ -1,20 +1,17 @@
 package com.huang.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.nio.charset.Charset;
 
 /**
  * Description:
@@ -26,7 +23,7 @@ import java.nio.charset.Charset;
  */
 @Service
 @Slf4j
-public class RabbitMqProducer {
+public class RabbitMqConfig {
 
     @Value("${rabbitmq.exchange.exception}")
     private String exceptionExchange;
@@ -43,17 +40,34 @@ public class RabbitMqProducer {
     @Value("${rabbitmq.pushkey.exception1}")
     private String exceptionPushKey1;
 
+    @Value("${rabbitmq.queue.deadLetter}")
+    private String deadLetterQueue;
+
     @Resource
-    private AmqpTemplate amqpTemplate;
+    private RabbitTemplate amqpTemplate;
 
     @Autowired
     private AmqpAdmin amqpAdmin;
 
     @PostConstruct
     public void initRabbitMQInfo(){
-        log.info(exceptionExchange + ", " + exceptionQuque + "," + exceptionPushKey);
+        //死信队列
+        Queue deadQueue = QueueBuilder.durable("dead_letter_queue")
+                .withArgument("x-dead-letter-exchange", exceptionExchange)
+                .withArgument("x-dead-letter-routing-key", exceptionPushKey1)
+                .withArgument("x-message-ttl", 10000)
+                .build();
+        amqpAdmin.declareQueue(deadQueue);
+
+        DirectExchange dle = new DirectExchange("dle");
+        amqpAdmin.declareExchange(dle);
+        amqpAdmin.declareBinding(BindingBuilder.bind(deadQueue).to(dle).with("dlk"));
+
         DirectExchange directEx = new DirectExchange(exceptionExchange);
-        Queue queue = new Queue(exceptionQuque);
+        Queue queue = QueueBuilder.durable(exceptionQuque)
+                .withArgument("x-dead-letter-exchange", "dle")
+                .withArgument("x-dead-letter-routing-key", "dlk")
+                .build();
 
         amqpAdmin.declareExchange(directEx);
         amqpAdmin.declareQueue(queue);
@@ -67,13 +81,8 @@ public class RabbitMqProducer {
         amqpAdmin.declareQueue(queue1);
 
         amqpAdmin.declareBinding(BindingBuilder.bind(queue1).to(directEx).with(exceptionPushKey1));
-        log.info("rabbitmq配置完成......");
-    }
 
-    public void messageProducer(String message){
-        log.info("消息内容：{}", message);
-        Message toMsg = MessageBuilder.withBody(message.getBytes(Charset.forName("UTF-8"))).build();
-        amqpTemplate.convertAndSend(exceptionExchange, exceptionPushKey, toMsg);
+        log.info("rabbitmq配置完成......");
     }
 
 }
