@@ -54,7 +54,7 @@ public class RabbitController {
 
     @GetMapping("/exception1")
     public String exception1(){
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             Map<String, String> map = new HashMap();
             map.put("key", "key" + i);
             map.put("name", "lisi" + i);
@@ -62,7 +62,7 @@ public class RabbitController {
             rabbitTemplate.convertAndSend(exceptionExchange, exceptionPushKey, JSON.toJSONString(map));
         }
 
-        for(int i = 10; i < 20; i++){
+        for(int i = 100; i < 200; i++){
             Map<String, String> map = new HashMap();
             map.put("key", "key" + i);
             map.put("name", "lisi" + i);

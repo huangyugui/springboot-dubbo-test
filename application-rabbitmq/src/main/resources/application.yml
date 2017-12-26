@@ -35,13 +35,13 @@ spring:
     username: admin
     listener:
       acknowledge-mode: Manual #接收端是否使用手动： auto：自动  Manual： 手动方式
-      concurrency: 1  #对每个listener在初始化的时候设置的并发消费者的个数，就是在rabbitmq中会建立5个消费者， 如果对消息的顺序有要求，勿使用此属性
+      concurrency: 3  #对每个listener在初始化的时候设置的并发消费者的个数，就是在rabbitmq中会建立5个消费者， 如果对消息的顺序有要求，勿使用此属性
       max-concurrency: 10
-      prefetch: 1 #每次投递给消费者的消息的个数
+      prefetch: 3 #每次投递给消费者的消息的个数
       default-requeue-rejected: false
-    cache:
-      channel:
-        size: 3
+#    cache:
+#      channel:
+#        size: 3
 
 
 mybatis:
