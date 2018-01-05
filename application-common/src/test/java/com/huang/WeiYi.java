@@ -3,6 +3,7 @@ package com.huang;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import sun.misc.Unsafe;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -24,8 +25,14 @@ public class WeiYi {
     private static final int TERMINATED =  3 << COUNT_BITS;
 
     public static void main(String[] args){
-        test3();
+        test4();
+    }
 
+    private static void test4(){
+        int h = 33;
+        int HASH_BITS = 0x7fffffff;
+        int r = (h ^ (h >>> 16)) & HASH_BITS;
+        System.out.println(r);
     }
 
     private static void test3(){
@@ -86,4 +93,29 @@ public class WeiYi {
         System.out.println(Integer.toBinaryString(-3));
     }
 
+}
+
+class Person{
+    String name;
+    String age;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(age);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(obj == null)
+            return false;
+        if(getClass() != obj.getClass())
+            return false;
+        Person p = (Person)obj;
+        if(this.name.equals(p.name) && this.age.equals(p.age))
+            return true;
+        return false;
+    }
 }
