@@ -46,6 +46,12 @@
                 <version>${mybatis.spring-boot.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>1.5.3.RELEASE</version>
+            </dependency>
+
             <!-- tomcat -->
             <dependency>
                 <groupId>org.apache.tomcat</groupId>

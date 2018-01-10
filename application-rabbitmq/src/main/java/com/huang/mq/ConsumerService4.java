@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.0
  *
  */
-@Component
+//@Component
 @Slf4j
 public class ConsumerService4 implements ChannelAwareMessageListener{
 

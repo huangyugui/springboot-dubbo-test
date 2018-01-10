@@ -5,6 +5,7 @@ import com.huang.config.RabbitConfirmCallback;
 import com.huang.config.RabbitMqSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -157,6 +160,14 @@ public class RabbitController {
         return "success";
     }
 
+    /** 
+     * Discription: 如果 rabbitTemplate.setMandatory(true);  如果routingKey不存在，且设置了rabbitTemplate.setReturnCallback(returnCallback);
+     *      那么该消息就会被返回回来
+     * Created on: 2018/1/10 11:29
+     * @param:  
+     * @return: 
+     * @author: <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
+     */
     @GetMapping("/exception5")
     public String exception5(){
         for(int i = 0; i < 10; i++){
@@ -167,6 +178,31 @@ public class RabbitController {
             //设置发送确认
             Object obj = sender.messageProducer(exceptionExchange, "aaa", JSON.toJSONString(map));
             log.info("{}", JSON.toJSONString(obj));
+        }
+        return "success";
+    }
+
+    /**
+     * Discription: 优先级队列
+     * Created on: 2018/1/10 11:29
+     * @param:
+     * @return:
+     * @author: <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
+     */
+    @GetMapping("/exception6")
+    public String exception6(){
+        for(int i = 0; i < 60; i++){
+            CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+            Map<String, String> map = new HashMap();
+            map.put("key", "key" + i);
+            map.put("name", "lisi" + i);
+            int priority = new Random().nextInt(20);
+            map.put("priority", priority + "");
+            System.out.println(JSON.toJSONString(map));
+            Message toMsg = MessageBuilder.withBody(JSON.toJSONString(map).getBytes(Charset.forName("UTF-8")))
+                    .setPriority(priority)
+                    .build();
+            rabbitTemplate.convertAndSend(exceptionExchange, "priority_queue", toMsg);
         }
         return "success";
     }
