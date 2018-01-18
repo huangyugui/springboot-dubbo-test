@@ -12,6 +12,7 @@
         <module>application-rabbitmq</module>
         <module>application-redis</module>
         <module>application-common</module>
+        <module>application-drools</module>
     </modules>
     <packaging>pom</packaging>
 
