@@ -1,8 +1,11 @@
 package com.xu.drools.bean;
 
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
+@ToString
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;

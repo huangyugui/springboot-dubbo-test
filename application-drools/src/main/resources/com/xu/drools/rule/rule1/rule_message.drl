@@ -1,0 +1,12 @@
+package com.xu.drools;
+
+import com.xu.drools.bean.Message;
+import com.xu.drools.bean.AlarmLevel;
+
+rule "error"
+	when
+        Message(systemId == 1)
+        $m :Message(alarmLevel == AlarmLevel.ERROR || alarmLevel == AlarmLevel.FATAL)
+    then
+		$m.setHitted(true);
+end

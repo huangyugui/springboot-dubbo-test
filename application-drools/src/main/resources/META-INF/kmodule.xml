@@ -6,13 +6,9 @@
         <ksession name="rule1KS"/>
     </kbase>
 
-    <kbase name="ruleAlarmKB" packages="com.xu.drools.rule1">
-        <ksession name="ruleAlarmKS"/>
-    </kbase>
-
-    <kbase name="ruleXMKB" packages="com.xu.drools.rule.rule1">
-        <ksession name="ruleXMKS"/>
-    </kbase>
+    <!--<kbase name="ruleAlarmKB" packages="com.xu.drools.rule.rule1">-->
+        <!--<ksession name="ruleAlarmKS"/>-->
+    <!--</kbase>-->
 
     <kbase name="rule2KB" packages="com.xu.drools.rule.rule2">
         <ksession name="rule2KS"/>
