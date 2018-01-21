@@ -23,6 +23,28 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * 另外如果prefetch设置为>1,则一次拿去多个消息，然后就会阻塞在那里，直到某个消息消费完毕，才去取下一个消息
  *
+ * 手动确认的方式下：
+ * 如果不手动确认，也不抛出异常，消息不会自动重新推送（包括其他消费者），
+ * 因为对于rabbitmq来说始终没有接收到消息消费是否成功的确认，并且Channel是在消费端有缓存的，没有断开连接
+ *
+ * 如果rabbitmq断开，连接后会自动重新推送（不管是网络问题还是宕机）
+ * 如果消费端应用重启，消息会自动重新推送
+ *
+ * 如果监听消息的方法抛出异常，消息会按照listener.retry的配置进行重发，但是重发次数完了之后还抛出异常的话，
+ * 消息不会重发（也不会重发到其他消费者），只有应用重启后会重新推送。因为retry是消费端内部处理的，
+ * 包括异常也是内部处理，对于rabbitmq是不知道的（此场景解决方案后面有）
+ *
+ * spring.rabbitmq.listener.retry配置的重发是在消费端应用内处理的，不是rabbitqq重发
+
+ 可以配置MessageRecoverer对异常消息进行处理，此处理会在listener.retry次数尝试完并还是抛出异常的情况下才会调用，
+ 默认有两个实现：
+    1、RepublishMessageRecoverer：将消息重新发送到指定队列，需手动配置，
+
+    2、RejectAndDontRequeueRecoverer：如果不手动配置MessageRecoverer，会默认使用这个，实现仅仅是将异常打印抛出，源码如下：
+
+ 可以通过给队列（Queue）绑定死信队列，使用nack反馈给mq，会将消息转发到死信队列里面，此种方式需要自己在消费消息的方法内部将异常处理掉
+
+    详情：http://dev.dafan.info/detail/575967?p=85
  * Created on 2017/8/11 10:44
  *
  * @author <a href="mailto: yugui_huang0305@163.com">黄渝贵</a>

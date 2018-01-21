@@ -43,7 +43,6 @@ spring:
 #      channel:
 #        size: 3
 
-
 mybatis:
   mapperLocations: classpath:/mappings/**/*.xml
   typeAliasesPackage: com.huang.entry

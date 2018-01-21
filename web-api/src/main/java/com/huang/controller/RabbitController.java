@@ -21,6 +21,20 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
+ *
+ * rabbitmq可靠发送的自动重试机制:https://www.jianshu.com/p/6579e48d18ae
+ *
+ * 用30个线程，无间隔的向rabbitmq发送数据，但是当运行一段时间后发现，会出现一些connection closed错误，
+ * rabbitTemplate虽然进行了自动重连，但是在重连的过程中，丢失了一部分数据。当时发送了300万条数据，丢失在2000条左右。
+     这种丢失率，对于一些对一致性要求很高的应用(比如扣款，转账)来说，是不可接受的。
+     在google了很久之后，在stackoverflow上找到rabbitTemplate作者对于这种问题的解决方案，\
+    他给的方案很简单，单纯的增加connection数：
+     connectionFactory.setChannelCacheSize(100);
+ *
+ *
+ * 当我们的网络在发生抖动时，这种方式还是不是安全的？
+ * 换句话说，如果我强制切断客户端和rabbitmq服务端的连接，数据还会丢失吗？仍然存在丢失数据的问题。
+ * 可以采用发送之前本地先缓存，开启发送端ack功能，然后定时的去查询本地消息没有被ack的，然后开启重发
  * Created by Administrator on 2017/7/31.
  */
 @RestController
