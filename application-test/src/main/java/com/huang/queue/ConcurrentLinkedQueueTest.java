@@ -1,6 +1,7 @@
 package com.huang.queue;
 
-import com.huang.thread.Driver;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
  * @version 1.0
  */
+@Slf4j
+@Getter
 public class ConcurrentLinkedQueueTest {
 
     private static ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
@@ -22,7 +25,6 @@ public class ConcurrentLinkedQueueTest {
                 queue.add("aaaa" + i);
             }
         }).start();
-
 //        new Thread(() -> {
 //            queue.offer("bbbb");
 //        }).start();
