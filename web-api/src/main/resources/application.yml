@@ -22,6 +22,7 @@ spring:
 
 
 
+
 spring.dubbo.application.owner: meijie-thirdparty-consumer
 spring.dubbo.application.name: meijie-thirdparty-consumer
 spring.dubbo.application.organization: gomefinance-meijie

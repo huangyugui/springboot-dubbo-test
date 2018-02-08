@@ -14,6 +14,8 @@ public class AtomicIntegerFieldUpdaterDemo {
         volatile int value2 = 2;
         protected volatile int value3 = 3;
         private volatile int value4 = 4;
+
+        public volatile int[] arr = new int[]{1, 2, 3, 4};
     }
 
     AtomicIntegerFieldUpdater<DemoData> getUpdater(String fieldName) {
@@ -29,6 +31,8 @@ public class AtomicIntegerFieldUpdaterDemo {
         // 因此不能够通过AtomicIntegerFieldUpdater来修改此值。因此运行时下面两句会得到一个非法访问的异常。
 //        System.out.println("2 ==> " + getUpdater("value3").decrementAndGet(data));
 //        System.out.println("true ==> " + getUpdater("value4").compareAndSet(data, 4, 5));
+        getUpdater("arr").compareAndSet(data, data.arr[2], 10);
+        System.out.println(data.arr);
     }
 
     public static void main(String[] args) {
@@ -45,6 +49,9 @@ public class AtomicIntegerFieldUpdaterDemo {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
+
+
     }
 }
 

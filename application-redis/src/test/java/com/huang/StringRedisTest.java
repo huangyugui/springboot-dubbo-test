@@ -75,7 +75,7 @@ public class StringRedisTest {
     public void before(){
         redisTemplate.execute(new RedisCallback() {
             public String doInRedis(RedisConnection connection) throws DataAccessException {
-                connection.flushDb();
+//                connection.flushDb();
                 return "ok";
             }
         });

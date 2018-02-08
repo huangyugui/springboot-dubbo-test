@@ -1,5 +1,6 @@
 package com.huang.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.AsyncTaskExecutor;
@@ -16,20 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
+    @Autowired
+    private ThreadPoolTaskExecutor executor;
+
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
         configurer.setDefaultTimeout(300000*1000L); //tomcat默认10秒
-        configurer.setTaskExecutor(mvcTaskExecutor());//所借助的TaskExecutor
+        configurer.setTaskExecutor(executor);//所借助的TaskExecutor
     }
 
-    @Bean
-    public ThreadPoolTaskExecutor mvcTaskExecutor(){
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(60);
-        executor.setQueueCapacity(100);
-        executor.setMaxPoolSize(1000);
-        executor.initialize();
-        return executor;
-
-    }
 }

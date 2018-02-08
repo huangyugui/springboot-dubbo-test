@@ -27,7 +27,8 @@ public class ruleAlarm {
         Message message = new Message();
         message.setAlarmLevel(AlarmLevel.ERROR);
         message.setSystemId("1");
-        FactHandle handle = ksession.insert(message);
+//        FactHandle handle = ksession.insert(message);
+        FactHandle handle = ksession.insert("aaa");
         ksession.fireAllRules();
         System.out.println(message.toString());
         ksession.dispose();

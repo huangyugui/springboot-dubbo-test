@@ -2,6 +2,7 @@ package com.huang.common;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ConnectionBackoffStrategy;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,6 +15,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultServiceUnavailableRetryStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
@@ -46,13 +48,17 @@ public class HttpClientUtil {
      */
     private static CloseableHttpClient createHttpClient() {
         RequestConfig config = RequestConfig.custom()
+                //建立连接和route响应的超时时间，调小能够有效的降低bad request对连接的占用，留给质量更好的请求，
+                // 有效提高系统提高吞吐能力及响应速度。否则有可能在峰值期被慢请求占满连接池，导致系统瘫痪
                 .setSocketTimeout(10000)
                 .setConnectTimeout(5000)
-                .setConnectionRequestTimeout(30000)
+                //获取连接的超时时间,调小超时时间能够有效提高响应速度并且降低积压请求量，但相应的也会增加请求失败的几率
+                .setConnectionRequestTimeout(10000)
                 .build();
+
         return HttpClients.custom().setDefaultRequestConfig(config)
-                .setMaxConnTotal(1000)
-                .setMaxConnPerRoute(20)
+                .setMaxConnTotal(1000)//全局最大连接数
+                .setMaxConnPerRoute(50)//单route连接数
                 .build();
     }
 
