@@ -19,6 +19,7 @@ public class LinkedBlockingQueueTest {
 
     private static void test1(){
         new Thread(() -> {
+
             log.info("wait for poll");
             try {
                 String str = queue.poll(500, TimeUnit.SECONDS);

@@ -11,8 +11,8 @@
         <module>application-order</module>
         <module>application-rabbitmq</module>
         <module>application-redis</module>
-        <module>application-common</module>
         <module>application-drools</module>
+        <module>application-test</module>
     </modules>
     <packaging>pom</packaging>
 

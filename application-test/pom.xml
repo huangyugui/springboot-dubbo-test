@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>application-common</artifactId>
+    <artifactId>application-test</artifactId>
     <packaging>jar</packaging>
 
-    <name>application-common</name>
+    <name>application-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
