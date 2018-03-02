@@ -1,0 +1,48 @@
+<configuration>
+
+
+    <property name="LOG_FILE" value="/data/logs/alarm"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <pattern>%-5level | %date | mj-v2.0 | %thread %logger{26}:%line | %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--%-5p(日志级别) | %d(日期) | bt-v1.0 | [%t(线程名称)-%T(线程号)] (%c{1.}(简化全类名):%L(行号)) | %m(日志信息)%n(换行)  -->
+    <!--<property name="PATTERN">%-5p | %d | bt-v1.0 | [%t-%T] (%c{1.}:%L) | %m%n</property>-->
+    <!-- 这一句至关重要如果没有，就无法输出sql语句 -->
+    <!-- <logger name="com.gomefinance" level="DEBUG"></logger>
+    -->
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_FILE}</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}/web-api_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %-5level | %date | mj-v2.0 | %thread %logger{26}:%line | %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="FILE"/>
+    </appender>
+
+
+    <root level="info">
+        <!--<appender-ref ref="ASYNC"/>-->  <!-- 输出到日志文件 -->
+        <appender-ref ref="STDOUT"/><!-- 输出到控制台 -->
+    </root>
+
+</configuration>

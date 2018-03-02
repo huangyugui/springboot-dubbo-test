@@ -42,9 +42,9 @@ public class ConsumerService2 implements ChannelAwareMessageListener{
 //        log.info("{}", JSON.toJSONString(message.getMessageProperties().getHeaders().get("x-death")));
         log.info("接收的消息：{}，通知次数：{}", new String(message.getBody()), count++);
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);//手动确认消息，队列中持久化消息会被删除
-//        channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);//手动否认一条消息,消息会被无限次重新接收,直到确认消息
-//        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);//手动否认消息,消息会被无限次重新接收,直到确认消息
-//        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);//如果将requeue设置为false，将不会重新回到队列，会被丢弃或者扔到死信队列里面
+        channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);//手动否认一条消息,消息会被无限次重新接收,直到确认消息
+        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);//手动否认消息,消息会被无限次重新接收,直到确认消息
+        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);//如果将requeue设置为false，将不会重新回到队列，会被丢弃或者扔到死信队列里面
         //throw new RuntimeException("测试异常是否重新接收");//抛出运行异常时,消息不会被重新接收
     }
 

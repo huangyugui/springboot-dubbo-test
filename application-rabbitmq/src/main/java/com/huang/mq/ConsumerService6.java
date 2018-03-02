@@ -82,7 +82,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @return:
  * @author: <a href="mailto: huangyugui@gomeholdings.com">黄渝贵</a>
  */
-@Component
+//@Component
 @Slf4j
 public class ConsumerService6 implements ChannelAwareMessageListener{
 
