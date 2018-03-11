@@ -41,6 +41,12 @@
                 <version>1.0.0</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mengyun</groupId>
+                <artifactId>tcc-transaction-spring</artifactId>
+                <version>1.2.4.17</version>
+            </dependency>
+
             <!-- mybatis springboots -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

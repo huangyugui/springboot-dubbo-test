@@ -1,7 +1,7 @@
 spring:
   datasource:
       name: dataSource
-      url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8
+      url: jdbc:mysql://localhost:3306/tcc?characterEncoding=UTF-8
       username: root
       password: rootroot
       # 使用druid数据源
@@ -23,7 +23,7 @@ spring:
       name: application-order
     protocol:
       name: dubbo
-      port: 20881
+      port: 20885
     registry:
       address: zookeeper://localhost:2291
     scan: com.huang

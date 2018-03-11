@@ -39,6 +39,10 @@ public class BinaryTree {
         if(node == null) return 0;
         int left = mindeep(node.getLeft());
         int right = mindeep(node.getRight());
+        //当left或者right == 0时，此时肯定该节点的左节点或者右节点为空
+        //假设左节点为空，那么left =0；那么如果右节点不为空，那么right 就等于当前节点的深度，
+        // 因此left + right + 1 表示当前节点的深度
+        //如果left和right都不为空，则求当前节点的左节点或者右节点的最小深度，+1表示从当前节点开始的最小节点
         return  (left==0||right==0) ? left + right + 1 : Math.min(left,right)+1;
     }
 
