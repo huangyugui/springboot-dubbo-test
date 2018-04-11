@@ -9,11 +9,18 @@ import junit.framework.TestSuite;
  */
 public class AppTest {
     public static void main(String[] args) {
-        filter("1");
-        filter("2");
-        filter("3");
-        filter("4");
-        filter("5");
+//        filter("1");
+//        filter("2");
+//        filter("3");
+//        filter("4");
+//        filter("5");
+        int n = 34;
+        // row = n / 32 求十进制数在数组a中的下标
+        int row = n >> 5;
+        // n & 0x1F 保留n的后五位
+        // 相当于 n % 32 求十进制数在数组a[i]中的下标
+        System.out.println(n & 0x1F);
+        System.out.println( 1 << (n & 0x1F));
 
     }
 

@@ -1,10 +1,6 @@
 package com.huang;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Hello world!
@@ -12,6 +8,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class App {
+
+
 
 
 
